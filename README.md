@@ -2,8 +2,8 @@
 
 Team:
 
-* Ian Belicina - Shoes!
-* Person 2 - Which microservice?
+* Person 1 - Which microservice?
+* Tawain Lanon - Hats
 
 ## Design
 
