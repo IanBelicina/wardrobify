@@ -30,7 +30,11 @@ class ShoeDetailEncoder(ModelEncoder):
 
 class ShoeListEncoder(ModelEncoder):
     model = Shoe
-    properties=["model_name","id","bin"]
+    properties=[
+        "model_name",
+        "id",
+        "bin"
+        ]
     encoders = {
         "bin":BinVODetailEncoder(),
     }
