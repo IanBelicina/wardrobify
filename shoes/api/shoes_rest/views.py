@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from .models import Shoe
 from django.views.decorators.http import require_http_methods
@@ -19,7 +20,7 @@ class ShoeEncoder(ModelEncoder):
 
 # Create your views here.
 
-@require_http_methods(["GET"])
+@require_http_methods(["GET","POST"])
 def api_shoes(request):
 
     if request.method == "GET":
@@ -27,4 +28,12 @@ def api_shoes(request):
         return JsonResponse(
             {"shoes":shoes},
             encoder=ShoeEncoder
+        )
+    else:
+        content = json.loads(request.body)
+        shoe = Shoe.objects.create(**content)
+        return JsonResponse(
+            shoe,
+            encoder=ShoeEncoder,
+            safe=False
         )
