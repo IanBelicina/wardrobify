@@ -37,7 +37,7 @@ function App(props) {
           <Route path="shoes">
             <Route index element={<ShoesList shoes={shoes} />} />
             {/* <Route path="new" element={<AttendConferenceForm conferences={conferences} getAttendees={getAttendees} />} /> */}
-        </Route>
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
