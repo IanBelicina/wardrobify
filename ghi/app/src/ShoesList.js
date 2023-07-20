@@ -92,7 +92,7 @@ function ShoesList({ shoes }){
               Here is your current shoe collection!
             </p>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Link to="/shoe/new" className="btn btn-primary btn-lg px-4 gap-3">Attend a shoe</Link>
+              <Link to="/shoes/new" className="btn btn-primary btn-lg px-4 gap-3">Attend a shoe</Link>
             </div>
           </div>
         </div>

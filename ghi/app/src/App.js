@@ -3,25 +3,38 @@ import MainPage from './MainPage';
 import Nav from './Nav';
 import ShoesList from './ShoesList';
 import { useState, useEffect } from 'react';
+import ShoeForm from './ShoeForm';
 
 function App(props) {
 
 
   const [ shoes, setShoes] = useState([]);
+  const [ bins, setBins] = useState([]);
 
   async function getShoes() {
     const response = await fetch('http://localhost:8080/api/shoes/');
     if (response.ok) {
       const { shoes } = await response.json();
       setShoes(shoes);
-      console.log(shoes);
+      // console.log(shoes);
     } else {
       console.error('An error occurred fetching the data')
     }
   }
 
+  async function getBins(){
+    const response = await fetch('http://localhost:8100/api/bins/');
+    if (response.ok){
+
+      const data = await response.json();
+      console.log(data, "these are bins");
+      setBins(data.bins);
+    }
+  }
+
   useEffect(() => {
     getShoes();
+    getBins();
   }, [])
 
   if (shoes === undefined){
@@ -36,8 +49,8 @@ function App(props) {
           <Route path="/" element={<MainPage />} />
           <Route path="shoes">
             <Route index element={<ShoesList shoes={shoes} />} />
-            {/* <Route path="new" element={<AttendConferenceForm conferences={conferences} getAttendees={getAttendees} />} /> */}
           </Route>
+          <Route path="shoes/new" element={<ShoeForm bins={bins} getShoes={getShoes} />} />
         </Routes>
       </div>
     </BrowserRouter>
