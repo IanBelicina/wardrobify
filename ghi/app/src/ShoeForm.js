@@ -35,7 +35,7 @@ function ShoeForm({getShoes, bins}){
         const response = await fetch(shoeUrl, fetchConfig);
         if (response.ok) {
             const newShoe = await response.json();
-            console.log(newShoe);
+            // console.log(newShoe);
 
             setManufacturer('');
             setBin('');

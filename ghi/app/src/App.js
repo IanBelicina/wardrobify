@@ -28,7 +28,7 @@ function App(props) {
     if (response.ok){
 
       const data = await response.json();
-      console.log(data, "these are bins");
+      // console.log(data, "these are bins");
       setBins(data.bins);
     }
   }

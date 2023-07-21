@@ -30,11 +30,7 @@ class ShoeDetailEncoder(ModelEncoder):
 
 class ShoeListEncoder(ModelEncoder):
     model = Shoe
-    properties=[
-        "model_name",
-        "id",
-        "bin"
-        ]
+    properties=["model_name","id","bin"]
     encoders = {
         "bin":BinVODetailEncoder(),
     }
@@ -95,8 +91,7 @@ def api_shoe_detail(request, id):
             shoe = Shoe.objects.get(id=id)
             shoe.delete()
             return JsonResponse(
-                shoe,
-                encoder=ShoeListEncoder,
+                {"deleted": True},
                 safe=False
             )
         except Shoe.DoesNotExist:
