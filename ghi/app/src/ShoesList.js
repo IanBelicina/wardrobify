@@ -8,7 +8,7 @@ function ShoeColumn(props) {
       <div className="col">
         {props.list.map(data => {
           const shoe = data;
-            console.log(shoe, "this is shoe")
+            // console.log(shoe, "this is shoe")
           return (
             <div key={shoe.id} className="card mb-3 shadow">
               <img src={shoe.url} className="card-img-top" />
@@ -92,8 +92,12 @@ function ShoesList({ shoes }){
               Here is your current shoe collection!
             </p>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Link to="/shoes/new" className="btn btn-primary btn-lg px-4 gap-3">Attend a shoe</Link>
+              <Link to="/shoes/new" className="btn btn-primary btn-lg px-4 gap-3">Add a shoe</Link>
             </div>
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <Link to="/shoes/delete" className="btn btn-primary btn-lg px-4 gap-3">Delete a shoe</Link>
+            </div>
+
           </div>
         </div>
         <div className="container">

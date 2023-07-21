@@ -4,6 +4,7 @@ import Nav from './Nav';
 import ShoesList from './ShoesList';
 import { useState, useEffect } from 'react';
 import ShoeForm from './ShoeForm';
+import DeleteShoe from './DeleteShoe';
 
 function App(props) {
 
@@ -51,6 +52,7 @@ function App(props) {
             <Route index element={<ShoesList shoes={shoes} />} />
           </Route>
           <Route path="shoes/new" element={<ShoeForm bins={bins} getShoes={getShoes} />} />
+          <Route path="shoes/delete" element={<DeleteShoe bins={bins} shoes={shoes} getShoes={getShoes}/>} />
         </Routes>
       </div>
     </BrowserRouter>

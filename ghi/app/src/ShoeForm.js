@@ -95,7 +95,7 @@ function ShoeForm({getShoes, bins}){
 
 
                   <div className="mb-3">
-                    <select value={bin.closet_name} onChange={handleChangeBin} name="bin" id="bin" className='form-select' required>
+                    <select value={bin} onChange={handleChangeBin} name="bin" id="bin" className='form-select' required>
                       <option value="">Choose a bin</option>
                       {bins.map(bin => {
                         return (
