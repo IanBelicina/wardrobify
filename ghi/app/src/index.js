@@ -8,3 +8,20 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+
+async function getHats() {
+  const response = await fetch('http://localhost:8090/api/hats/');
+  if (response.ok) {
+    const data = await response.json();
+    root.render(
+      <React.StrictMode>
+        <App hats={data.hats} />
+      </React.StrictMode>
+    );
+    console.log(data);
+  } else {
+    console.error(response);
+  }
+}
+getHats();

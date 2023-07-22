@@ -5,10 +5,12 @@ import ShoesList from './ShoesList';
 import { useState, useEffect } from 'react';
 import ShoeForm from './ShoeForm';
 import DeleteShoe from './DeleteShoe';
+import HatsList from './HatsList';
+import HatForm from './HatForm';
 
 function App(props) {
-
-
+  const [ locations, setLocations] = useState([]);
+  const [ hats, setHats] = useState([]);
   const [ shoes, setShoes] = useState([]);
   const [ bins, setBins] = useState([]);
 
@@ -32,16 +34,38 @@ function App(props) {
       setBins(data.bins);
     }
   }
-
+  async function getHats() {
+    const response = await fetch('http://localhost:8090/api/hats/');
+    if (response.ok) {
+      const { hats } = await response.json();
+      setHats(hats);
+    } else {
+      console.error('An error occurred fetching the data');
+    }
+  }
+  async function getLocations() {
+    const response = await fetch('http://localhost:8100/api/locations/');
+    if (response.ok) {
+      const data = await response.json();
+      setLocations(data.locations);
+      console.log(data.locations);
+    } else {
+      console.error('An error occurred fetching the data');
+    }
+  }
   useEffect(() => {
     getShoes();
     getBins();
+    getHats();
+    getLocations();
   }, [])
 
   if (shoes === undefined){
     return null
   }
-
+  if (props.hats === undefined){
+    return null
+  }
   return (
     <BrowserRouter>
       <Nav />
@@ -51,6 +75,8 @@ function App(props) {
           <Route path="shoes">
             <Route index element={<ShoesList shoes={shoes} />} />
           </Route>
+          <Route path="hats/new" element={<HatForm locations={locations} getHats={getHats} />} />
+          <Route path="hats" element={<HatsList hats={hats} />} />
           <Route path="shoes/new" element={<ShoeForm bins={bins} getShoes={getShoes} />} />
           <Route path="shoes/delete" element={<DeleteShoe bins={bins} shoes={shoes} getShoes={getShoes}/>} />
         </Routes>
