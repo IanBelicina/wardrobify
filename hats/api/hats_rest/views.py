@@ -83,8 +83,10 @@ def api_show_hat(request, id):
         return JsonResponse({"deleted": count > 0})
     else:
         content = json.loads(request.body)
-        Hat.objects.filter(id=id).update(**content)
         hat = Hat.objects.get(id=id)
+        for key, value in content.items():
+            setattr(hat, key, value)
+        hat.save()
         return JsonResponse(
             hat,
             encoder=HatDetailEncoder,
