@@ -63,9 +63,17 @@ function HatForm ({ locations, getHats }) {
 
     const handlePictureUrlChange = (event) => {
       const value = event.target.value;
-      if (!value) {
-        setPictureUrl('Auto');
+      if (value.toLowerCase() === "auto") {
+        // If the user enters 'Auto', fetch an image from Pexels
+        fetchImageFromPexels(`${fabric} ${style_name} ${color}`)
+          .then((imageUrl) => {
+            setPictureUrl(imageUrl);
+          })
+          .catch((error) => {
+            console.error('Failed to fetch image from Pexels:', error);
+          });
       } else {
+        // If the user entered a URL, use that
         setPictureUrl(value);
       }
     };
@@ -152,7 +160,7 @@ function HatForm ({ locations, getHats }) {
                 <label htmlFor="color">Color</label>
               </div>
               <div className="form-floating mb-3">
-              <input placeholder="Enter Picture URL or 'Auto'" value={picture_url} onChange={handlePictureUrlChange} name="picture_url" required type="text" id="picture_url" className="form-control"/>
+              <input placeholder="Enter Picture URL or 'Auto'" value={picture_url} onChange={handlePictureUrlChange} name="picture_url" type="text" id="picture_url" className="form-control"/>
                 <label htmlFor="picture_url">Picture Url</label>
               </div>
               <div className="mb-3">
